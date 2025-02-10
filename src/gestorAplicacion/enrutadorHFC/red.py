@@ -1,0 +1,3 @@
+class Red():
+
+  FLUJO_RED_PRELIMINAR=500
