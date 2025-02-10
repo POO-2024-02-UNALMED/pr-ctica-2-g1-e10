@@ -1,0 +1,54 @@
+import sys
+
+sys.path.append("src/gestorAplicacion/enrutadorHFC")
+sys.path.append("src/gestorAplicacion/servicio")
+
+from antena import Antena
+from servidor import Servidor 
+from router import Router
+from antena import Antena
+from factura import Factura
+from plano import Plano
+
+class Cliente:
+  
+  # //CLASE PRINCIPAL YA QUE CASI TODAS LAS FUNCIONALIDADES ESTÁN ORIENTADAS A LOS CLIENTES
+
+  # CONSTRUCTOR
+
+  def __init__(self, nombre=None, ID=0, proveedor=None, modem=None,  plan=[], nombrePlan=None, factura=None):
+    
+    # ATRIBUTOS
+    self._nombre=nombre
+    self._ID = ID
+    self._modem = modem
+    self._proveedor = proveedor
+    self._plan = plan
+    self._nombrePlan = nombrePlan
+    self._factura = factura
+
+    if proveedor!=None: #NO AÑADE CUANDO EL PROVEEDOR ES POR DEFECTO
+      proveedor.getClientes().append(self)
+
+
+  #METODOS
+
+  # //METODO INSTANCIA--FUNCIONALIDAD ADQUISICION DE PLAN---RETORNA UNA LISTA CON CLIENTES QUE PERTENECEN A UN PLAN ESPECÍFICO
+  def buscarCliente(self, clientes, nombrePlan):
+    clientesPorPlan=[]
+    for cliente in clientes:
+      if cliente.getNombrePlan()!=None:
+        if cliente.getNombrePlan() == nombrePlan:
+          clientesPorPlan.append(cliente)
+    return clientesPorPlan
+
+  #  //METODO ESTÁTICO---FUNCIONALIDAD REPORTE---RETORNA UNA LISTA  CON CLIENTES QUE PERTENECEN A UN MISMO PROVEEDOR, SEDE Y PLAN
+  @classmethod
+  def buscarCliente1(cls,sede, nombrePlan, proveedor):
+    clientesPlan=[]
+    for cliente in proveedor.getClientes():
+      if cliente.getNombrePlan()!=None:
+        if (cliente.getNombrePlan() == nombrePlan) and (cliente.getModem().getSede() == sede):
+          clientesPlan.append(cliente)
+
+    return clientesPlan
