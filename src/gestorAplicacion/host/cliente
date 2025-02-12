@@ -52,3 +52,102 @@ class Cliente:
           clientesPlan.append(cliente)
 
     return clientesPlan
+
+  # //METODO INSTANCIA---FUNCIONALIDAD ADQUISICION DE PLAN---REALIZA TODOS LOS CAMBIOS NECESARIOS PARA REGISTRAR A UN CLIENTE NUEVO, BUSCA UN SERVIDOR Y UNA ANTENA DEL PROVEEDOR INDICADO PARA ASOCIARLOS AL NUEVO ROUTER 
+  def configurarPlan(self, plan, cliente, proveedor, sede, coordenadaX, coordenadaY):
+
+    servidorAsociado=None
+
+    for servidor in Servidor.getServidoresTotales():
+      if servidor.getProveedor().getNombre()==proveedor.getNombre():
+        if servidor.getSede()==sede:
+          servidorAsociado=servidor
+
+    if plan=="BASIC":
+      cliente.setNombrePlan(plan)
+      cliente.setPlan(proveedor.getPlanes().getBASIC())
+      routercliente = Router(proveedor.getPlanes().getBASIC()[0], proveedor.getPlanes().getBASIC()[1],True,servidorAsociado)
+      cliente.setModem(routercliente)
+      routercliente.setSede(sede)
+      planoCliente = Plano(coordenadaX,coordenadaY)
+      planoCliente.setSede(servidorAsociado.getCoordenadas().getSede())
+      routercliente.setCoordenadas(planoCliente)
+
+      for antena in Antena.getAntenasTotales():
+        if antena.getSede()==sede:
+          if antena.getProveedor().getNombre()==proveedor.getNombre():
+            routercliente.setAntenaAsociada(antena)
+            break  
+            
+    elif plan=="STANDARD":
+      cliente.setNombrePlan(plan)
+      cliente.setPlan(proveedor.getPlanes().getSTANDARD())
+      routercliente = Router(proveedor.getPlanes().getSTANDARD()[0], proveedor.getPlanes().getSTANDARD()[1],True,servidorAsociado);
+      cliente.setModem(routercliente)
+      routercliente.setSede(sede)
+      planoCliente = Plano(coordenadaX,coordenadaY)
+      planoCliente.setSede(servidorAsociado.getCoordenadas().getSede())
+      routercliente.setCoordenadas(planoCliente)
+
+      for antena in Antena.getAntenasTotales():
+        if antena.getSede()==sede:
+          if antena.getProveedor().getNombre()==proveedor.getNombre():
+            routercliente.setAntenaAsociada(antena)
+            break  
+    else:
+      cliente.setNombrePlan(plan)
+      cliente.setPlan(proveedor.getPlanes().getPREMIUM())
+      routercliente = Router(proveedor.getPlanes().getPREMIUM()[0],proveedor.getPlanes().getPREMIUM()[1],True,servidorAsociado);
+      cliente.setModem(routercliente)
+      routercliente.setSede(sede)
+      planoCliente = Plano(coordenadaX,coordenadaY)
+      planoCliente.setSede(servidorAsociado.getCoordenadas().getSede())
+      routercliente.setCoordenadas(planoCliente)
+
+      for antena in Antena.getAntenasTotales():
+        if antena.getSede()==sede:
+          if antena.getProveedor().getNombre()==proveedor.getNombre():
+            routercliente.setAntenaAsociada(antena)
+            break
+          
+    return Factura(cliente)
+
+  #SETTERS Y GETTERS
+  def getNombre(self):
+    return self._nombre
+  
+  def setNombre(self, nombre):
+    self._nombre=nombre
+    
+  def getID(self):
+    return self._ID
+
+  def getModem(self):
+    return self._modem
+  
+  def setModem(self, modem):
+    self._modem=modem
+
+  def getProveedor(self):
+    return self._proveedor
+  
+  def setProveedor(self, proveedor):
+    self._proveedor=proveedor
+
+  def getPlan(self):
+    return self._plan
+  
+  def setPlan(self,plan):
+    self._plan=plan
+
+  def getNombrePlan(self):
+    return self._nombrePlan
+  
+  def setNombrePlan(self,nombrePlan):
+    self._nombrePlan=nombrePlan
+
+  def getFactura(self):
+    return self._factura
+  
+  def setFactura(self,factura):
+    self._factura=factura
