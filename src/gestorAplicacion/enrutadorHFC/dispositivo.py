@@ -21,8 +21,8 @@ class Dispositivo:
 
   @classmethod
   def desconectarDispositivo(cls, cliente, dispositivo):
-    if (cliente.getModem().verificarDispositivos(Dispositivo._dispositivosTotales,cliente.getModem()).contains(dispositivo) ):
-      dispositivo.setIpAsociada("")
+    if dispositivo in cliente.getModem().verificarDispositivos(Dispositivo._dispositivosTotales, cliente.getModem()):
+      dispositivo.setIpAsociado("")
       return "Dispositivo desconectado correctamente."
     else:
       return "Dispositivo inválido, intente de nuevo."

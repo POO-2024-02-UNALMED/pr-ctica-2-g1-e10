@@ -67,7 +67,7 @@ class Factura:
     self._ip=cliente.getModem().getIP()  
     self._pagosAtrasados=0
     self._precio= precioplan
-    self._mesActivacion= Mes.JUNIO.value
+    self._mesActivacion= Mes.FEBRERO.value
     cliente.setFactura(self) 
 
     return self

@@ -9,6 +9,7 @@ from router import Router
 from antena import Antena
 from factura import Factura
 from plano import Plano
+from dispositivo import Dispositivo
 
 class Cliente:
   
@@ -72,6 +73,7 @@ class Cliente:
       planoCliente = Plano(coordenadaX,coordenadaY)
       planoCliente.setSede(servidorAsociado.getCoordenadas().getSede())
       routercliente.setCoordenadas(planoCliente)
+      dispositivoCliente = Dispositivo(routercliente, "Celular", "3G")
 
       for antena in Antena.getAntenasTotales():
         if antena.getSede()==sede:
@@ -88,6 +90,7 @@ class Cliente:
       planoCliente = Plano(coordenadaX,coordenadaY)
       planoCliente.setSede(servidorAsociado.getCoordenadas().getSede())
       routercliente.setCoordenadas(planoCliente)
+      dispositivoCliente = Dispositivo(cliente.getModem(), "Celular", "3G")
 
       for antena in Antena.getAntenasTotales():
         if antena.getSede()==sede:
@@ -103,6 +106,7 @@ class Cliente:
       planoCliente = Plano(coordenadaX,coordenadaY)
       planoCliente.setSede(servidorAsociado.getCoordenadas().getSede())
       routercliente.setCoordenadas(planoCliente)
+      dispositivoCliente = Dispositivo(cliente.getModem(), "Celular", "3G")
 
       for antena in Antena.getAntenasTotales():
         if antena.getSede()==sede:

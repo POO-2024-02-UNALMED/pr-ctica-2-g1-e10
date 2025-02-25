@@ -37,7 +37,9 @@ class ProveedorInternet:
 					if cliente.getNombrePlan()=="PREMIUM":
 						return cliente
 					elif cliente.getNombrePlan()=="STANDARD":
-						return cliente 
+						return cliente
+					elif cliente.getNombrePlan()=="BASIC":
+						return cliente
 					else:
 						return None
 		else:
@@ -70,6 +72,7 @@ class ProveedorInternet:
 	#  //METODO INSTANCIA---FUNCIONALIDAD ADQUISICION DE PLAN--PERMITE CREAR UN NUEVO CLIENTE CON LOS DATOS INDICADOS
 	def crearCliente(self,nombre,id_):
 		cliente = Cliente(nombre,id_)
+		self._clientes.append(cliente)
 		return cliente
 
 	# //METODO ESTÁTICO--FUNCIONALIDAD AQUISICION DE PLAN---MEDIANTE EL ARREGLO ESTÁTICO DE TODOS LOS SERVIDORES DE LA CLASE SERVIDOR, SE HALLAN LOS PROVEEDORES QUE PERTENEZCAN A UNA SEDE ESPECIFICA

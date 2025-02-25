@@ -44,11 +44,14 @@ class Antena(Cobertura):
 
   # //METODO INSTANCIA---IMPLEMENTACION Y SOBREESCRITURA METODO ABSTRACTO QUE SE HEREDA DE COBERTURA-FUNCIONALIDAD TEST--BUSCA UNA ANTENA EN LA QUE EL CLIENTE SE ENCUENTRE DENTRO DE SU ZONA DE COBERTURA Y LA GENERACION DE ESTA Y EL ROUTER SEAN LAS MISMAS
   def rastrearGeneracionCompatible(self, antenas_sede, router):
-
-    antenas_cercanas = list(filter(lambda antena: antena.verificarZonaCobertura(router, antena),antenas_sede))
-    antena_encontrada = next(antena for antena in antenas_cercanas if antena.getGeneracion() == router.getGeneracion() or None)
-
+    antenas_cercanas = list(filter(lambda antena: antena.verificarZonaCobertura(router, antena), antenas_sede))
+    antena_encontrada = next(
+        (antena for antena in antenas_cercanas if antena.getGeneracion() == router.getGeneracion()), None
+    )
+    
     return antena_encontrada
+
+
   
   # //METODO INSTANCIA---CALCULA SI LA UBICACION DEL ROUTER (COORDENADAS) SE ENCUENTRA DENTRO DE LA ZONA DE COBERTURA DE LA ANTENA--FUNCIONALIDAD TEST
   def verificarZonaCobertura(self, router, antena):
